@@ -23,9 +23,53 @@ This is a queuing model in which the arrival is Marcovian and departure distribu
 
  
 ## Program
-![image](https://github.com/ramjan1729/Single-server-infinite-capacity---Markov-Model/assets/103921593/5f1fd58d-5929-4c51-89ea-4cef009e5bad)
+````
+# Getting Inputs
+ArrivalTime = int(input("Enter mean inter arrival time (secs): "))
+MachineTime = int(input("Enter service time of Lathe Machine (secs): "))
+RobotTime = int(input("Enter service time of Robot (secs): "))
 
+# Total service time
+TotalService = MachineTime + RobotTime
+
+# Lambda and Mu
+Lambda = 1 / ArrivalTime
+Mu = 1 / TotalService
+
+print("Lambda =", round(Lambda,3))
+print("Mu =", round(Mu,3))
+
+if Lambda < Mu:
+
+    Ls = Lambda / (Mu - Lambda)
+    Lq = (Lambda**2) / (Mu * (Mu - Lambda))
+    Ws = 1 / (Mu - Lambda)
+    Wq = Lambda / (Mu * (Mu - Lambda))
+
+    print("Average number of materials in system =", round(Ls,2))
+    print("Average number of materials in conveyor =", round(Lq,2))
+    print("Waiting time in system =", round(Ws,2),"secs")
+    print("Waiting time in conveyor =", round(Wq,2),"secs")
+
+    print("Probability system busy =", round(Lambda/Mu,2))
+    print("Probability system empty =", round(1-(Lambda/Mu),2))
+
+else:
+    print("Overflow will occur")
+````
 ## Output :
-
+~~~
+Enter mean inter arrival time (secs):  12
+Enter service time of Lathe Machine (secs):  1
+Enter service time of Robot (secs):  7
+Lambda = 0.083
+Mu = 0.125
+Average number of materials in system = 2.0
+Average number of materials in conveyor = 1.33
+Waiting time in system = 24.0 secs
+Waiting time in conveyor = 16.0 secs
+Probability system busy = 0.67
+Probability system empty = 0.33
+~~~
 ## Result :
-
+Thus the python program is implemented and executed successfully
